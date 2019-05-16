@@ -6,8 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using CO599_CP_ABCRenters.Models;
 
-namespace CO599_CP_ABCRenters.Models
+namespace CO599_CP_ABCRenters.Controllers
 {
     public class AddressesController : Controller
     {
