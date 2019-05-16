@@ -10,7 +10,7 @@ using CO599_CP_ABCRenters.Models;
 
 namespace CO599_CP_ABCRenters.Controllers
 {
-    public class PropertiesController : Controller
+    public class PropertyController : Controller
     {
         private PropertyDbContext db = new PropertyDbContext();
 
