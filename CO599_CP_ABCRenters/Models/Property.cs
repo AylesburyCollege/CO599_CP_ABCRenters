@@ -69,5 +69,6 @@ namespace CO599_CP_ABCRenters.Models
 
         public virtual Address Address { get; set; }
 
+        public virtual ICollection<PropertyImage> ImagesList { get; set; }
     }
 }

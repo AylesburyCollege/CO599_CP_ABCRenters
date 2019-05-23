@@ -51,27 +51,30 @@ namespace CO599_CP_ABCRenters.Models
         GUEST_BEDROOM
 
     }
-    public class PropertyImage
-    {
 
-        public int PropertyImageID { get; set; }
+        
+        public class PropertyImage
+        {
 
-        [Required, StringLength(255), DataType(DataType.ImageUrl)]
-        public string ImageURL { get; set; }
+            public int PropertyImageID { get; set; }
 
-        [Required, StringLength(255)]
-        public string Description { get; set; }
+            [Required, StringLength(255), DataType(DataType.ImageUrl)]
+            public string ImageURL { get; set; }
 
-        [Required, StringLength(50)]
-        public string Caption { get; set; }
+            [Required, StringLength(255)]
+            public string Description { get; set; }
 
-        public ImageFormats ImageFormat { get; set; }
+            [Required, StringLength(50)]
+            public string Caption { get; set; }
 
-        public ImageRooms Position { get; set; }
+            public ImageFormats ImageFormat { get; set; }
 
-        // FK
+            public ImageRooms Rooms { get; set; }
 
-        public int PropertyID { get; set; }
-        public virtual Property Property { get; set; }
-    }
+            // FK
+
+            public int PropertyID { get; set; }
+            public virtual Property Property { get; set; }
+        }
+   
 }

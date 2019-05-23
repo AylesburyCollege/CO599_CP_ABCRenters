@@ -10,107 +10,112 @@ using CO599_CP_ABCRenters.Models;
 
 namespace CO599_CP_ABCRenters.Controllers
 {
-    public class PropertyController : Controller
+    public class PropertyImagesController : Controller
     {
         private PropertyDbContext db = new PropertyDbContext();
 
-        // GET: Properties
-        public ActionResult Index(string searchString)
+        // GET: PropertyImages
+        public ActionResult Index()
         {
-            return View(db.Properties.ToList());
+            var propertyImages = db.PropertyImages.Include(p => p.Property);
+            return View(propertyImages.ToList());
         }
 
-        // GET: Properties/Details/5
+        // GET: PropertyImages/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = db.Properties.Find(id);
-            if (property == null)
+            PropertyImage propertyImage = db.PropertyImages.Find(id);
+            if (propertyImage == null)
             {
                 return HttpNotFound();
             }
-            return View(property);
+            return View(propertyImage);
         }
 
-        // GET: Properties/Create
+        // GET: PropertyImages/Create
         public ActionResult Create()
         {
+            ViewBag.PropertyID = new SelectList(db.Properties, "PropertyID", "Name");
             return View();
         }
 
-        // POST: Properties/Create
+        // POST: PropertyImages/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PropertyID,Name,Description,Price,Category,AvailableDate,EstateAgent,Bedrooms,AddressID,PetsAllowed,IsShared")] Property property)
+        public ActionResult Create([Bind(Include = "PropertyImageID,ImageURL,Description,Caption,ImageFormat,Rooms,PropertyID")] PropertyImage propertyImage)
         {
             if (ModelState.IsValid)
             {
-                db.Properties.Add(property);
+                db.PropertyImages.Add(propertyImage);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(property);
+            ViewBag.PropertyID = new SelectList(db.Properties, "PropertyID", "Name", propertyImage.PropertyID);
+            return View(propertyImage);
         }
 
-        // GET: Properties/Edit/5
+        // GET: PropertyImages/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = db.Properties.Find(id);
-            if (property == null)
+            PropertyImage propertyImage = db.PropertyImages.Find(id);
+            if (propertyImage == null)
             {
                 return HttpNotFound();
             }
-            return View(property);
+            ViewBag.PropertyID = new SelectList(db.Properties, "PropertyID", "Name", propertyImage.PropertyID);
+            return View(propertyImage);
         }
 
-        // POST: Properties/Edit/5
+        // POST: PropertyImages/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PropertyID,Name,Description,Price,Category,AvailableDate,EstateAgent,Bedrooms,AddressID,PetsAllowed,IsShared")] Property property)
+        public ActionResult Edit([Bind(Include = "PropertyImageID,ImageURL,Description,Caption,ImageFormat,Rooms,PropertyID")] PropertyImage propertyImage)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(property).State = EntityState.Modified;
+                db.Entry(propertyImage).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(property);
+            ViewBag.PropertyID = new SelectList(db.Properties, "PropertyID", "Name", propertyImage.PropertyID);
+            return View(propertyImage);
         }
 
-        // GET: Properties/Delete/5
+        // GET: PropertyImages/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = db.Properties.Find(id);
-            if (property == null)
+            PropertyImage propertyImage = db.PropertyImages.Find(id);
+            if (propertyImage == null)
             {
                 return HttpNotFound();
             }
-            return View(property);
+            return View(propertyImage);
         }
 
-        // POST: Properties/Delete/5
+        // POST: PropertyImages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Property property = db.Properties.Find(id);
-            db.Properties.Remove(property);
+            PropertyImage propertyImage = db.PropertyImages.Find(id);
+            db.PropertyImages.Remove(propertyImage);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

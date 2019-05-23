@@ -19,10 +19,12 @@ namespace CO599_CP_ABCRenters.Models
         {
         }
 
-        public System.Data.Entity.DbSet<CO599_CP_ABCRenters.Models.Address> Addresses { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
-        public System.Data.Entity.DbSet<CO599_CP_ABCRenters.Models.Property> Properties { get; set; }
+        public DbSet<Property> Properties { get; set; }
 
-        public System.Data.Entity.DbSet<CO599_CP_ABCRenters.Models.Customer> Customers { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+
+        public System.Data.Entity.DbSet<CO599_CP_ABCRenters.Models.PropertyImage> PropertyImages { get; set; }
     }
 }
